@@ -1,7 +1,7 @@
 document.documentElement.classList.add('js');
 
 // Google Analytics (GA4) com Consent Mode: estatística só com o "Aceitar"; anúncios sempre negados.
-window.GA_ID = 'G-PENDENTE';
+window.GA_ID = 'G-VWBWQSQR42';
 window.dataLayer = window.dataLayer || [];
 function gtag() { dataLayer.push(arguments); }
 (function () {

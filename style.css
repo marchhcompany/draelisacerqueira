@@ -67,3 +67,4 @@ figure,blockquote,dl,dd,ul{margin:0}ul{padding:0}img,svg,iframe,video{display:bl
 /* barra fixa em telas estreitas: o botao do WhatsApp encolhe e quebra linha */
 @media(max-width:720px){.mobile-book{padding-left:12px;padding-right:12px}.mobile-book .btn-dark{flex:1 1 0;min-width:0;white-space:normal;line-height:1.2;padding:8px 10px}.mobile-book .mb-icon{min-width:54px}}
 @media(max-width:360px){.mobile-book .btn-dark{font-size:11.5px;gap:6px}.mobile-book .mb-icon{min-width:48px;padding:6px 4px}}
+@media(max-width:720px){.mobile-book .mb-icon{width:auto;flex:0 0 auto}}

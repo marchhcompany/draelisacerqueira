@@ -34,14 +34,14 @@ document.addEventListener('DOMContentLoaded',()=>{
     b.className = 'cookie-banner';
     b.setAttribute('role', 'region');
     b.setAttribute('aria-label', 'Aviso de cookies');
-    b.innerHTML = '<p>Usamos cookies de estatística para entender as visitas e melhorar o site. Veja a <a href="/privacidade.html">política de privacidade</a>.</p>' +
+    b.innerHTML = '<p>Usamos cookies de estatística e de anúncios do Google para entender as visitas e medir nossas campanhas. Veja a <a href="/privacidade.html">política de privacidade</a>.</p>' +
       '<div class="cookie-actions"><button type="button" class="btn btn-line" data-cookie="nao">Recusar</button><button type="button" class="btn btn-dark" data-cookie="sim">Aceitar</button></div>';
     b.addEventListener('click', function (e) {
       var bt = e.target.closest('[data-cookie]');
       if (!bt) return;
       var sim = bt.dataset.cookie === 'sim';
       gravar(sim ? 'sim' : 'nao');
-      if (sim && window.gtag) gtag('consent', 'update', { analytics_storage: 'granted' });
+      if (sim && window.gtag) gtag('consent', 'update', { analytics_storage: 'granted', ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted' });
       b.remove();
     });
     document.body.appendChild(b);
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     document.querySelectorAll('[data-cookie-reset]').forEach(function (bt) {
       bt.addEventListener('click', function () {
         try { localStorage.removeItem(CHAVE); } catch (e) {}
-        if (window.gtag) gtag('consent', 'update', { analytics_storage: 'denied' });
+        if (window.gtag) gtag('consent', 'update', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
         aviso();
       });
     });
@@ -68,6 +68,8 @@ document.addEventListener('DOMContentLoaded',()=>{
       var s = a.closest('section[id], header, footer, #mobile-book');
       var secao = !s ? 'outro' : s.id === 'mobile-book' ? 'barra_celular' : s.tagName === 'HEADER' ? 'cabecalho' : s.tagName === 'FOOTER' ? 'rodape' : s.id;
       gtag('event', ev, { secao: secao, link_url: h.split('?')[0] });
+      var rotulo = window.ADS_CONVERSOES && window.ADS_CONVERSOES[ev];
+      if (window.ADS_ID && rotulo) gtag('event', 'conversion', { send_to: window.ADS_ID + '/' + rotulo });
     });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar); else iniciar();
